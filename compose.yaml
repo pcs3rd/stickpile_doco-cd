@@ -17,7 +17,8 @@ services:
       #- "80:80" # Webhook endpoint
       - "9120:9120" # Prometheus metrics
     # For all available environment variables and explanations, see https://github.com/kimdre/doco-cd/wiki/App-Settings
-  
+    env_file:
+      - .env
     environment:
       TZ: America/New_York
       #GIT_ACCESS_TOKEN: 
@@ -27,7 +28,8 @@ services:
       # <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /persist/prod/base/doco-cd:/data
+      - ${persist_data_home}:/data
+      - ./doco-cd.yaml:/data/doco-cd.yaml:ro
     secrets:
       - sops_age_key
       - git_access_token
