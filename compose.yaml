@@ -29,7 +29,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /persist/prod/base/doco-cd:/data
-      - doco-cd.yaml:/data/doco-cd.yaml:ro
     secrets:
       - sops_age_key
       - git_access_token
