@@ -8,7 +8,7 @@
 
 services:
   app:
-    container_name: doco-cd
+    #container_name: doco-cd
     # You can also pin to a specific tag (version)
     # Available tags can be found here: https://github.com/kimdre/doco-cd/pkgs/container/doco-cd
     image: ghcr.io/kimdre/doco-cd:latest
