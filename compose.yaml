@@ -1,10 +1,10 @@
 ## Uncomment the poll configuration section here and in the service `environment:` section if you want to enable polling of a repository.
-#x-poll-config: &poll-config
-#  POLL_CONFIG: |
-#    - url: https://github.com/kimdre/doco-cd.git  # This is the repository to poll
-#      reference: main  # Optional: specify the branch or tag to poll, defaults to 'main'
-#      interval: 180  # Optional: specify the interval in seconds to poll the repository, defaults to 180 seconds (3 minutes)
-#      target: ""  # Optional: use to target a specific deployment config file, e.g., "test" -> .doco-cd.test.yaml
+x-poll-config: &poll-config
+ POLL_CONFIG: |
+   - url: https://github.com/pcs3rd/stickpile_compose-config.git  # This is the repository to poll
+     reference: main  # Optional: specify the branch or tag to poll, defaults to 'main'
+     interval: 180  # Optional: specify the interval in seconds to poll the repository, defaults to 180 seconds (3 minutes)
+     target: ""  # Optional: use to target a specific deployment config file, e.g., "test" -> .doco-cd.test.yaml
 
 services:
   doco-cd:
@@ -25,7 +25,7 @@ services:
       #WEBHOOK_SECRET: 
       HTTP_PORT: 99
       SOPS_AGE_KEY_FILE: /run/secrets/sops_age_key
-      # <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
+      <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /persist/prod/base/doco-cd:/data
@@ -46,6 +46,11 @@ services:
       - "traefik.http.routers.doco.tls.certresolver=httpsResolve"
       - "traefik.http.services.doco.loadbalancer.server.port=80"
       #- "traefik.http.routers.doco.middlewares=middlewares-authentik@file"
+    deploy:
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
 
 secrets:
   sops_age_key: # Preferably detatch this from any public git repos. This is an immutable mount on every host.
