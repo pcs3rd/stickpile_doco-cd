@@ -2,14 +2,17 @@
 It interacts with a (currently private) repo.  
 ## Initial configuration (New deployment)
 Init a new docker swarm: 
-> docker swarm init  
-
+```
+docker swarm init  
+```
 Assign a UID to each node via labels. 
-> $ docker node update --label-add unique_id=<uid> <node_id>
-
+```
+$ docker node update --label-add unique_id=<uid> <node_id>
+```
 Optionally confirm node names are correct.
-> docker node ls -q | xargs docker node inspect -f '{{ .ID }} [{{ .Description.Hostname }}]: {{ .Spec.Labels }}'
-
+```
+$ docker node ls -q | xargs docker node inspect -f '{{ .ID }} [{{ .Description.Hostname }}]: {{ .Spec.Labels }}'
+```
 Create docker secrets for websocket/access token doco-cd should automatically use swarm mode if a swarm exists. 
 ``` 
 $ echo "token" | docker secret create git_access_token -
