@@ -27,11 +27,11 @@ $ echo "secret" | docker secret create webhook_secret -
 ```
 $ docker stack deploy doco-cd --compose-file compose.yaml -d
 ```
-Alternatively, if you've already called shell.nix, cd to the root of this repo and run ```deploy```
+Alternatively, if you've already called ```shell.nix```, cd to the root of this repo and run ```deploy```
 
 ## ENV Vars
 All services use ENV vars that have been encrypted with SOPS.  
-If this is a new deployment, fork `github:pcs3rd/stacks`, then complete the ENV vars using relevent project documentation. 
+If this is a new deployment, fork `github:pcs3rd/stickpile_compose-config`, then complete the ENV vars using relevent project documentation. 
 
 After configuting env vars, encrypt them using `age`. Call `shell.nix` via `$ nix-shell` to create a shell with the needed programs to create encrypted env vars.
 
