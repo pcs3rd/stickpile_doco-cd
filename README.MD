@@ -1,11 +1,11 @@
 # Stickpile.net doco-cd deployment 
 It interacts with a (currently private) repo.  
 ## Initial configuration (New deployment)
-Init a new docker swarm: 
+**Step 1:** Init a new docker swarm: 
 ```
 docker swarm init  
 ```
-Assign a UID to each node via labels. 
+**Step 2:** Assign a UID to each node via labels. 
 ```
 $ docker node update --label-add unique_id=<uid> <node_id>
 ```
@@ -13,13 +13,21 @@ Optionally confirm node names are correct.
 ```
 $ docker node ls -q | xargs docker node inspect -f '{{ .ID }} [{{ .Description.Hostname }}]: {{ .Spec.Labels }}'
 ```
-Create docker secrets for websocket/access token doco-cd should automatically use swarm mode if a swarm exists. 
+**Step 3:** Create docker secrets for websocket/access token doco-cd should automatically use swarm mode if a swarm exists. 
 ``` 
 $ echo "token" | docker secret create git_access_token -
 ```
 ```
 $ echo "secret" | docker secret create webhook_secret -
 ```
+**Step 4:** Create some folders.  
+  I don't know where you want to store data, but folders need to be created before deployment in swarm mode. Figure it out.
+
+**Step 5:** Deploy doco-cd.
+```
+$ docker stack deploy doco-cd --compose-file compose.yaml -d
+```
+Alternatively, if you've already called shell.nix, cd to the root of this repo and run ```deploy```
 
 ## ENV Vars
 All services use ENV vars that have been encrypted with SOPS.  
