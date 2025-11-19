@@ -5,7 +5,7 @@
 
 
   shellHook = ''
-    alias deploy=" docker stack deploy doco-cd --compose-file compose.yaml -d"
+    alias deploy=" docker stack deploy doco-cd --compose-file compose.yaml -d && lazydocker"
     alias undeploy="docker stack rm doco-cd"
   '';
 }
