@@ -36,13 +36,16 @@ If this is a new deployment, fork `github:pcs3rd/stickpile_compose-config`, then
 After configuting env vars, encrypt them using `age`. Call `shell.nix` via `$ nix-shell` to create a shell with the needed programs to create encrypted env vars.
 
 **1. If you haven't already, create an age key.**
-> age-keygen -o sops_age_key.txt
+```
+$ age-keygen -o sops_age_key.txt
+```
 
 In my current deployment (`github:pcs3rd/nix-config#sevenofnine`), this key lives in `/stateful/sys-data/sops_age_key.txt`, and is explicitly ignored in `.gitignore`. The sops private key _may not_ be published for secrets to be safe. 
 
 **2. Encrypt the env files.** 
-> sops encrypt --age age1g3lcl... secrets.env > secrets.enc.env
-
+```
+$ sops encrypt --age age1g3lcl... secrets.env > secrets.enc.env
+```
 As a side note, if deplying a new stack, make sure. to call the secrets from doco-cd with the following example.
 ```
 services:  

@@ -5,7 +5,7 @@
 
 
   shellHook = ''
-    alias test="echo 'test'"
+    alias deploy=" docker stack deploy doco-cd --compose-file compose.yaml -d"
     alias ll="ls -alF"
   '';
 }
