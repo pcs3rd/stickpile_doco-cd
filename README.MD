@@ -46,6 +46,11 @@ In my current deployment (`github:pcs3rd/nix-config#sevenofnine`), this key live
 ```
 $ sops encrypt --age age1g3lcl... secrets.env > secrets.enc.env
 ```
+If editing a file is needed, either tell SOPS where to look for the key using `SOPS_AGE_KEY_FILE`, place the key in `$XDG_CONFIG_HOME/sops/age/keys.txt`, or provide it directly with the ` SOPS_AGE_KEY` env var
+
+```
+$ sops secrets.enc.env
+```
 As a side note, if deplying a new stack, make sure. to call the secrets from doco-cd with the following example.
 ```
 services:  
@@ -53,7 +58,3 @@ services:
     env_file:  
       - secrets.enc.env  
 ```
-
-
-Note on `./stacks-reference`:
-It actually doesn't matter if this submodule is up-to-date, since doco-cd pulls from the remote repo directly. If needed, doco-cd can be pointed to this directory.
