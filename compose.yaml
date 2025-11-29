@@ -26,7 +26,7 @@ services:
       # <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ${persist_data_home}:/data
+      - /persist/prod/core/doco-cd:/data
     secrets:
       - sops_age_key
       - git_access_token
