@@ -54,8 +54,12 @@ services:
 
 secrets:
   sops_age_key: # Preferably detatch this from any public git repos. This is an immutable mount on every host.
-    file: /stateful/sys-data/sops_age_key.txt
-  git_access_token:
-    external: true
-  webhook_secret:
-    external: true
+    file: /stateful/sys-data/secrets/sops_age_key.txt
+  git_access_token: 
+    file: /stateful/sys-data/secrets/git-pat.txt
+  webhook_secret: 
+    file: /stateful/sys-data/secrets/ws-secret.txt
+  # git_access_token:
+  #   external: true
+  # webhook_secret:
+  #   external: true
