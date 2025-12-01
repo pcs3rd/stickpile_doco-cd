@@ -58,3 +58,7 @@ services:
     env_file:  
       - secrets.enc.env  
 ```
+
+# Notes % Additional
+
+If you need to map specific variables, call them with just a ``$``
