@@ -1,5 +1,5 @@
 # Stickpile.net doco-cd deployment 
-It interacts with a (currently private) repo.  
+If you'd like to see the service declarations, they can be found [here](https://github.com/pcs3rd/stickpile_compose-config/tree/dev)
 ## Initial configuration (New deployment)
 **Step 1:** Init a new docker swarm: 
 ```
