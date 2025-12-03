@@ -5,8 +5,10 @@
 
 
   shellHook = ''
-    alias deploy=" docker stack deploy doco-cd --compose-file compose.yaml -d && lazydocker"
-    alias undeploy="docker stack rm doco-cd"
+    alias swarm-deploy=" docker stack deploy doco-cd --compose-file compose.yaml -d && lazydocker"
+    alias swarm-undeploy="docker stack rm doco-cd"
+    alias svls="docker service ps $(docker service ls -q) --no-trunc"
+    alias rasv="docker service rm $(docker service ls -q)"
   '';
 }
 
