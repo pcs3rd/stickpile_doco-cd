@@ -25,6 +25,7 @@ services:
       #WEBHOOK_SECRET: 
       HTTP_PORT: 80
       SOPS_AGE_KEY_FILE: /run/secrets/sops_age_key
+      API_SECRET_FILE: /run/secrets/api_key
       <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
     # networks: 
     #   traefik_backbone:
@@ -61,6 +62,8 @@ secrets:
     file: /stateful/sys-data/secrets/git-pat.txt
   webhook_secret: 
     file: /stateful/sys-data/secrets/ws-secret.txt
+  api_key: 
+    file: /stateful/sys-data/secrets/doco-cd_api-key.txt
   # git_access_token:
   #   external: true
   # webhook_secret:
