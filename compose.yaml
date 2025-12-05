@@ -45,7 +45,7 @@ services:
       - "traefik.http.routers.doco.entrypoints=websecure"
       - "traefik.http.routers.doco.tls.certresolver=httpsResolve"
       - "traefik.http.services.doco.loadbalancer.server.port=1099"
-      - "traefik.http.routers.doco.middlewares=middlewares-authentik@file"
+    #  - "traefik.http.routers.doco.middlewares=middlewares-authentik@file"
     # deploy:
     #   replicas: 1
     #   placement:
