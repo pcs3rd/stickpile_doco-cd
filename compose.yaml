@@ -32,10 +32,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /persist/prod/base/doco-cd:/data
-    secrets:
-      - sops_age_key
-      - git_access_token
-      - webhook_secret
     healthcheck:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/v1/health" ]  # Also change the port here if you change the default HTTP_PORT env var
       start_period: 15s
@@ -54,7 +50,13 @@ services:
     #   placement:
     #     constraints:
     #       - node.role == manager
+    secrets:
+      - sops_age_key
+      - git_access_token
+      - webhook_secret
+      - api_key
 
+      
 secrets:
   sops_age_key: # Preferably detatch this from any public git repos. This is an immutable mount on every host.
     file: /stateful/sys-data/secrets/sops_age_key.txt
