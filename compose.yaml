@@ -16,7 +16,7 @@ services:
     ports:
       #- "80:80" # Webhook endpoint
       - "9120:9120" # Prometheus metrics
-      - "1099: 1099"
+      - "1099:1099"
     # For all available environment variables and explanations, see https://github.com/kimdre/doco-cd/wiki/App-Settings
     # env_file:
     #   - .env
