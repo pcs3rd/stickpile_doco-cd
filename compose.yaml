@@ -39,13 +39,13 @@ services:
       interval: 30s
       timeout: 5s
       retries: 3
-    # labels:
-      # - "traefik.enable=true"
-      # - "traefik.http.routers.doco.rule=Host(`doco-cd.webhook.stickpile.net`)"
-      # - "traefik.http.routers.doco.entrypoints=websecure"
-      # - "traefik.http.routers.doco.tls.certresolver=httpsResolve"
-      # - "traefik.http.services.doco.loadbalancer.server.port=1099"
-      #- "traefik.http.routers.doco.middlewares=middlewares-authentik@file"
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.doco.rule=Host(`doco-cd.webhook.stickpile.net`)"
+      - "traefik.http.routers.doco.entrypoints=websecure"
+      - "traefik.http.routers.doco.tls.certresolver=httpsResolve"
+      - "traefik.http.services.doco.loadbalancer.server.port=1099"
+      - "traefik.http.routers.doco.middlewares=middlewares-authentik@file"
     # deploy:
     #   replicas: 1
     #   placement:
@@ -72,7 +72,8 @@ secrets:
   # webhook_secret:
   #   external: true
 
-# networks:
-#   traefik_backbone: # For external containers.
-#     name: traefik_backbone
-#     external: true
+networks:
+  backbone:
+    driver: overlay # Need this for inter-node traffic
+    attachable: true
+    external: false
