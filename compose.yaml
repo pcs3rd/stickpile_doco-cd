@@ -23,7 +23,7 @@ services:
       TZ: America/New_York
       #GIT_ACCESS_TOKEN: 
       #WEBHOOK_SECRET: 
-      HTTP_PORT: 99
+      HTTP_PORT: 80
       SOPS_AGE_KEY_FILE: /run/secrets/sops_age_key
       <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
     # networks: 
@@ -36,7 +36,7 @@ services:
       - git_access_token
       - webhook_secret
     healthcheck:
-      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:99/v1/health" ]  # Also change the port here if you change the default HTTP_PORT env var
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/v1/health" ]  # Also change the port here if you change the default HTTP_PORT env var
       start_period: 15s
       interval: 30s
       timeout: 5s
