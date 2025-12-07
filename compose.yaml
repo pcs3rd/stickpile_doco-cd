@@ -56,6 +56,8 @@ services:
       - git_access_token
       - webhook_secret
       - api_key
+    networks:
+      - backbone
 
 
 secrets:
