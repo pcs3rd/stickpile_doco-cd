@@ -28,8 +28,8 @@ services:
       SOPS_AGE_KEY_FILE: /run/secrets/sops_age_key
       API_SECRET_FILE: /run/secrets/api_key
       <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
-    # networks: 
-    #   traefik_backbone:
+    networks: 
+      traefik_backbone:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /persist/prod/base/doco-cd:/data
@@ -56,8 +56,7 @@ services:
       - git_access_token
       - webhook_secret
       - api_key
-    networks:
-      - backbone
+
 
 
 secrets:
@@ -75,7 +74,6 @@ secrets:
   #   external: true
 
 networks:
-  backbone:
-    driver: overlay # Need this for inter-node traffic
-    attachable: true
-    external: false
+  backbone: # For external containers.
+    name: traefik_backbone
+    external: true
