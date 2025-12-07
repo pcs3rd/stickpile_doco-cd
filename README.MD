@@ -24,6 +24,9 @@ $ echo "token" | docker secret create git_access_token -
 ```
 $ echo "secret" | docker secret create webhook_secret -
 ```
+Alternatively, use files to bring secrets into docker. The current deployment uses that method.
+
+
 **Step 5:** Create some folders.  
   I don't know where you want to store data, but folders need to be created before deployment in swarm mode. Figure it out.
 
