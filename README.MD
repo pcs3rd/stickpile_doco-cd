@@ -5,7 +5,11 @@ If you'd like to see the service declarations, they can be found [here](https://
 ```
 docker swarm init  
 ```
-**Step 2:** Assign a UID to each node via labels. 
+**Step 2:** Create a backbone network, so that containers are reachable from the reverse proxy/
+```
+$ docker network create --driver overlay traefik_backbone --attachable
+```
+**Step 3:** Assign a UID to each node via labels. 
 ```
 $ docker node update --label-add unique_id=<uid> <node_id>
 ```
@@ -13,17 +17,17 @@ Optionally confirm node names are correct.
 ```
 $ docker node ls -q | xargs docker node inspect -f '{{ .ID }} [{{ .Description.Hostname }}]: {{ .Spec.Labels }}'
 ```
-**Step 3:** Create docker secrets for websocket/access token doco-cd should automatically use swarm mode if a swarm exists. 
+**Step 4:** Create docker secrets for websocket/access token doco-cd should automatically use swarm mode if a swarm exists. 
 ``` 
 $ echo "token" | docker secret create git_access_token -
 ```
 ```
 $ echo "secret" | docker secret create webhook_secret -
 ```
-**Step 4:** Create some folders.  
+**Step 5:** Create some folders.  
   I don't know where you want to store data, but folders need to be created before deployment in swarm mode. Figure it out.
 
-**Step 5:** Deploy doco-cd.
+**Step 6:** Deploy doco-cd.
 ```
 $ docker stack deploy doco-cd --compose-file compose.yaml -d
 ```
