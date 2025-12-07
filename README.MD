@@ -3,7 +3,7 @@ If you'd like to see the service declarations, they can be found [here](https://
 ## Initial configuration (New deployment)
 **Step 1:** Init a new docker swarm: 
 ```
-docker swarm init  
+$ docker swarm init  
 ```
 **Step 2:** Create a backbone network, so that containers are reachable from the reverse proxy/
 ```
