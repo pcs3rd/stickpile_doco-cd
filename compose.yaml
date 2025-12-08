@@ -24,12 +24,9 @@ services:
       TZ: America/New_York
       #GIT_ACCESS_TOKEN: 
       HTTP_PORT: 1099
-      WEBHOOK_SECRET: /run/secrets/webhook_secret
       SOPS_AGE_KEY_FILE: /run/secrets/sops_age_key
       API_SECRET_FILE: /run/secrets/api_key
       <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
-    networks: 
-      backbone:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /persist/prod/base/doco-cd:/data
@@ -54,10 +51,7 @@ services:
     secrets:
       - sops_age_key
       - git_access_token
-      - webhook_secret
       - api_key
-
-
 
 secrets:
   sops_age_key: # Preferably detatch this from any public git repos. This is an immutable mount on every host.
@@ -68,12 +62,3 @@ secrets:
     file: /stateful/sys-data/secrets/ws-secret.txt
   api_key: 
     file: /stateful/sys-data/secrets/doco-cd_api-key.txt
-  # git_access_token:
-  #   external: true
-  # webhook_secret:
-  #   external: true
-
-networks:
-  backbone: # For external containers.
-    name: traefik_backbone
-    external: true
