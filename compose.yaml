@@ -29,7 +29,7 @@ services:
       <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /persist/prod/base/doco-cd:/data
+      - /stateful/Application_Data/doco-cd:/data
     healthcheck:
       test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:1099/v1/health" ]  # Also change the port here if you change the default HTTP_PORT env var
       start_period: 15s
