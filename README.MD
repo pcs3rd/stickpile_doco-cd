@@ -1,6 +1,6 @@
 # Stickpile.net doco-cd deployment 
 If you'd like to see the service declarations, they can be found [here](https://github.com/pcs3rd/stickpile_compose-config/tree/dev)
-## Initial configuration (New deployment)
+## Initial configuration (New deployment) [DOCKER SWARM]
 **Step 1:** Init a new docker swarm: 
 ```
 $ docker swarm init  
