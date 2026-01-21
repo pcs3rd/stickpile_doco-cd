@@ -41,7 +41,7 @@ services:
       retries: 3
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.doco.rule=Host(`doco-cd.webhook.stickpile.net`)"
+      - "traefik.http.routers.doco.rule=Host(`doco.stickpile.net`)"
       - "traefik.http.routers.doco.entrypoints=websecure"
       - "traefik.http.routers.doco.tls.certresolver=httpsResolve"
       - "traefik.http.services.doco.loadbalancer.server.port=80"
