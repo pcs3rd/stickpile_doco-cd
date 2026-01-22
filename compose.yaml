@@ -33,7 +33,7 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /persist/prod/base/doco-cd:/data
-    healthcheck:
+    # healthcheck:
       # test: [ "CMD", "curl", "-f", "http://localhost:80/v1/health" ]  # Also change the port here if you change the default HTTP_PORT env var
       # start_period: 15s
       # interval: 30s
