@@ -24,7 +24,7 @@ services:
       TZ: America/New_York
       #GIT_ACCESS_TOKEN: 
       HTTP_PORT: 80
-      WEBHOOK_SECRET: /run/secrets/webhook_secret
+      WEBHOOK_SECRET_FILE: /run/secrets/webhook_secret
       SOPS_AGE_KEY_FILE: /run/secrets/sops_age_key
       API_SECRET_FILE: /run/secrets/api_key
       #<<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
