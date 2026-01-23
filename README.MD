@@ -1,5 +1,27 @@
 # Stickpile.net doco-cd deployment 
 If you'd like to see the service declarations, they can be found [here](https://github.com/pcs3rd/stickpile_compose-config/tree/dev)
+## Initial config (New Deployment) [Docker Standalone]
+**Step 1:**
+```
+$ docker compose up
+```
+**Step 2:**
+Depending on what branch is checked out, doco-cd is configured to not poll github, and redeploy when it's websocket endpoint is hit. 
+
+```
+echo -n "your-payload-here" | openssl dgst -sha256 -hmac $(cat /stateful/sys-data/secrets/ws-secret.txt)
+```
+
+```
+curl -X POST \
+     -H "Content-Type: application/json" \
+     -H "X-Hub-Signature-256: sha256=$(cat /stateful/sys-data/secrets/ws-secret.txt)" \
+     --data '{"payload": "your-payload-here"}' \
+     http://localhost:1099/v1/api/v1/webhook/us-east-stickpile-prod
+```
+
+
+
 ## Initial configuration (New deployment) [DOCKER SWARM]
 **Step 1:** Init a new docker swarm: 
 ```

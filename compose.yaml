@@ -1,10 +1,10 @@
 ## Uncomment the poll configuration section here and in the service `environment:` section if you want to enable polling of a repository.
-# x-poll-config: &poll-config
-#  POLL_CONFIG: |
-#    - url: https://github.com/pcs3rd/stickpile_compose-config.git  # This is the repository to poll
-#      reference: prod  # Optional: specify the branch or tag to poll, defaults to 'main'
-#      interval: 300  # Optional: specify the interval in seconds to poll the repository, defaults to 180 seconds (3 minutes)
-#      target: "us-east-stickpile-prod"  # Optional: use to target a specific deployment config file, e.g., "test" -> .doco-cd.test.yaml
+x-poll-config: &poll-config
+ POLL_CONFIG: |
+   - url: https://github.com/pcs3rd/stickpile_compose-config.git  # This is the repository to poll
+     reference: prod  # Optional: specify the branch or tag to poll, defaults to 'main'
+     interval: 3003153600000  # Optional: specify the interval in seconds to poll the repository, defaults to 180 seconds (3 minutes)
+     target: "us-east-stickpile-prod"  # Optional: use to target a specific deployment config file, e.g., "test" -> .doco-cd.test.yaml
 
 services:
   doco-cd:
