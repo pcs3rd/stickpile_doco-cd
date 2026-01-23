@@ -11,7 +11,7 @@ services:
     #container_name: doco-cd
     # You can also pin to a specific tag (version)
     # Available tags can be found here: https://github.com/kimdre/doco-cd/pkgs/container/doco-cd
-    image: ghcr.io/kimdre/doco-cd:0.54.0
+    image: ghcr.io/kimdre/doco-cd:0.57.0
     restart: unless-stopped
     ports:
       #- "80:80" # Webhook endpoint
@@ -30,18 +30,18 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /stateful/Application_Data/doco-cd:/data
-    healthcheck:
-      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:1099/v1/health" ]  # Also change the port here if you change the default HTTP_PORT env var
-      start_period: 15s
-      interval: 30s
-      timeout: 5s
-      retries: 3
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.doco.rule=Host(`doco-cd.webhook.stickpile.net`)"
-      - "traefik.http.routers.doco.entrypoints=websecure"
-      - "traefik.http.routers.doco.tls.certresolver=httpsResolve"
-      - "traefik.http.services.doco.loadbalancer.server.port=1099"
+    # healthcheck:
+    #   test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:1099/v1/health" ]  # Also change the port here if you change the default HTTP_PORT env var
+    #   start_period: 15s
+    #   interval: 30s
+    #   timeout: 5s
+    #   retries: 3
+    # labels:
+      # - "traefik.enable=true"
+      # - "traefik.http.routers.doco.rule=Host(`doco-cd.webhook.stickpile.net`)"
+      # - "traefik.http.routers.doco.entrypoints=websecure"
+      # - "traefik.http.routers.doco.tls.certresolver=httpsResolve"
+      # - "traefik.http.services.doco.loadbalancer.server.port=1099"
     #  - "traefik.http.routers.doco.middlewares=middlewares-authentik@file"
     # deploy:
     #   replicas: 1
@@ -58,7 +58,7 @@ secrets:
     file: /stateful/sys-data/secrets/sops_age_key.txt
   git_access_token: 
     file: /stateful/sys-data/secrets/git-pat.txt
-  webhook_secret: 
-    file: /stateful/sys-data/secrets/ws-secret.txt
+  # webhook_secret: 
+  #   file: /stateful/sys-data/secrets/ws-secret.txt
   api_key: 
     file: /stateful/sys-data/secrets/doco-cd_api-key.txt
