@@ -1,14 +1,14 @@
 # Stickpile.net doco-cd deployment 
 If you'd like to see the service declarations, they can be found [here](https://github.com/pcs3rd/stickpile_compose-config/)
 ## Deployment
-1. Clone this repo, and check out the environment branch
+**1. Clone this repo, and check out the environment branch**  
 ``` 
-$ git clone https://github.com/pcs3rd/sitkcpile_doco-cd
+$ git clone https://github.com/pcs3rd/stickpile_doco-cd
 ```
 ``` 
 $ git switch <branch name> 
 ```
-2. Start `doco-cd` via `docker-compose`, and wait for it to start the environment. 
+**2. Start `doco-cd` via `docker-compose`, and wait for it to start the environment.**  
 ```
 $ docker compose up -d
 ```
@@ -31,7 +31,7 @@ In my current deployment (`github:pcs3rd/nix-config#sevenofnine`), this key live
 ```
 $ sops encrypt --age age1g3lcl... secrets.env > secrets.enc.env
 ```
-If editing a file is needed, either tell SOPS where to look for the key using `SOPS_AGE_KEY_FILE`, place the key in `$XDG_CONFIG_HOME/sops/age/keys.txt`, or provide it directly with the ` SOPS_AGE_KEY` env var
+If editing a file is needed, either tell SOPS where to look for the key using `SOPS_AGE_KEY_FILE`, place the key in `$XDG_CONFIG_HOME/sops/age/keys.txt`, or provide it directly with the `SOPS_AGE_KEY` env var
 
 ```
 $ sops secrets.enc.env
@@ -42,8 +42,16 @@ services:
   app:  
     env_file:  
       - secrets.enc.env  
+```  
+**- or -**
+reference the env var in `environment:`
 ```
-
+services:  
+  app:  
+    environment: 
+      - supersecretvar1
+      - supersecretvar2
+```
 # Notes 
 
 If you need to map specific variables, call them with just a ``$``. Doco-cd will substitute in-place.
