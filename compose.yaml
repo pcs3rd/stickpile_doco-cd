@@ -72,8 +72,3 @@ secrets:
   #   external: true
   # webhook_secret:
   #   external: true
-
-networks:
-  backbone: # For external containers.
-    name: traefik_backbone
-    external: true
