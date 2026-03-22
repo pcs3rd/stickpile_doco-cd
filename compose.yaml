@@ -28,8 +28,7 @@ services:
       SOPS_AGE_KEY_FILE: /run/secrets/sops_age_key
       API_SECRET_FILE: /run/secrets/api_key
       <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
-    networks: 
-      backbone:
+
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /persist/prod/base/doco-cd:/data
