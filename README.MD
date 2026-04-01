@@ -16,14 +16,9 @@ $ docker compose up -d
 
 ## ENV Vars
 All services use ENV vars that have been encrypted with SOPS.  
-If this is a new deployment, fork `github:pcs3rd/stickpile_compose-config`, then complete the ENV vars using relevent project documentation. 
+If this is a new deployment, fork `github:pcs3rd/stickpile_compose-config`.   
 
-After configuting env vars, encrypt them using `age`. Call `shell.nix` via `$ nix-shell` to create a shell with the needed programs to create encrypted env vars.
-
-**1. If you haven't already, create an age key.**
-```
-$ age-keygen -o sops_age_key.txt
-```
+The env vars in this repo are all encrypted. They are not readable without the correct age key, which you likely won't (and will never) have.
 
 In my current deployment (`github:pcs3rd/nix-config#sevenofnine`), this key lives in `/stateful/sys-data/sops_age_key.txt`, and is explicitly ignored in `.gitignore`. The sops private key _will not_ be published to keep secrets to be safe. 
 
