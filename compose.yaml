@@ -11,7 +11,7 @@ services:
     #container_name: doco-cd
     # You can also pin to a specific tag (version)
     # Available tags can be found here: https://github.com/kimdre/doco-cd/pkgs/container/doco-cd
-    image: ghcr.io/kimdre/doco-cd:0.76.0
+    image: ghcr.io/kimdre/doco-cd:0.89.1
     restart: unless-stopped
     ports:
       #- "80:80" # Webhook endpoint
@@ -22,17 +22,17 @@ services:
     #   - .env
     environment:
       TZ: America/New_York
-      GIT_ACCESS_TOKEN: 
+      #GIT_ACCESS_TOKEN: 
       HTTP_PORT: 80
       WEBHOOK_SECRET_FILE: /run/secrets/webhook_secret
       SOPS_AGE_KEY_FILE: /run/secrets/sops_age_key
       API_SECRET_FILE: /run/secrets/api_key
-      <<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
+      #<<: *poll-config  # Uncomment this line to use the poll configuration from above (the `x-poll-config` section).
     networks: 
       backbone:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /persist/prod/base/doco-cd:/data
+      - doco_data:/data
     # healthcheck:
       # test: [ "CMD", "curl", "-f", "http://localhost:80/v1/health" ]  # Also change the port here if you change the default HTTP_PORT env var
       # start_period: 15s
@@ -77,3 +77,6 @@ networks:
   backbone: # For external containers.
     name: traefik_backbone
     external: true
+
+volumes: 
+  doco_data:
