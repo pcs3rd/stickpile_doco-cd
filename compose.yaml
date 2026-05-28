@@ -32,7 +32,7 @@ services:
       backbone:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - /persist/prod/base/doco-cd:/data
+      - doco_data:/data
     # healthcheck:
       # test: [ "CMD", "curl", "-f", "http://localhost:80/v1/health" ]  # Also change the port here if you change the default HTTP_PORT env var
       # start_period: 15s
@@ -77,3 +77,6 @@ networks:
   backbone: # For external containers.
     name: traefik_backbone
     external: true
+
+volumes: 
+  doco_data:
