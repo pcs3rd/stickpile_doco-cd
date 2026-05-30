@@ -12,7 +12,6 @@ services:
     # You can also pin to a specific tag (version)
     # Available tags can be found here: https://github.com/kimdre/doco-cd/pkgs/container/doco-cd
     image: ghcr.io/kimdre/doco-cd:0.89.1
-    restart: unless-stopped
     ports:
       #- "80:80" # Webhook endpoint
       - "9120:9120" # Prometheus metrics
@@ -56,7 +55,13 @@ services:
       - git_access_token
       - webhook_secret
       - api_key
-
+    deploy:
+      replicas: 0
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+        window: 120s
 
 
 secrets:
