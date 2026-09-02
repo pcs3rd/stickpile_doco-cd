@@ -11,7 +11,7 @@ services:
     #container_name: doco-cd
     # You can also pin to a specific tag (version)
     # Available tags can be found here: https://github.com/kimdre/doco-cd/pkgs/container/doco-cd
-    image: ghcr.io/kimdre/doco-cd:0.94.0
+    image: ghcr.io/kimdre/doco-cd:0.114.0
     restart: unless-stopped
     ports:
       #- "80:80" # Webhook endpoint
