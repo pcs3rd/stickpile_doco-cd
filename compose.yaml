@@ -3,8 +3,8 @@ x-poll-config: &poll-config
  POLL_CONFIG: |
    - url: https://github.com/pcs3rd/stickpile_compose-config.git  # This is the repository to poll
      reference: prod  # Optional: specify the branch or tag to poll, defaults to 'main'
-     interval: 300  # Optional: specify the interval in seconds to poll the repository, defaults to 180 seconds (3 minutes)
-     target: "prod"  # Optional: use to target a specific deployment config file, e.g., "test" -> .doco-cd.test.yaml
+     interval: 180  # Optional: specify the interval in seconds to poll the repository, defaults to 180 seconds (3 minutes)
+     target: "us-east-mesh-prod"  # Optional: use to target a specific deployment config file, e.g., "test" -> .doco-cd.test.yaml
 
 services:
   doco-cd:
@@ -39,7 +39,7 @@ services:
       # timeout: 5s
       # retries: 3
     labels:
-      - "traefik.enable=true"
+      - "traefik.enable=false"
       - "traefik.http.routers.doco.rule=Host(`doco.stickpile.net`)"
       - "traefik.http.routers.doco.entrypoints=websecure"
       - "traefik.http.routers.doco.tls.certresolver=httpsResolve"
