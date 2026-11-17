@@ -54,7 +54,7 @@ services:
       - webhook_secret
       - api_key
     deploy:
-      replicas: 0
+      replicas: 1
       restart_policy:
         condition: on-failure
         delay: 5s
